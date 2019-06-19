@@ -109,7 +109,7 @@ namespace Sitecore.Support.Framework.Publishing.Data.Classic.SqlServer
 					THEN 'Created' 
 					ELSE 'Updated' END AS EditType,
 
-				   CASE WHEN dbItem.Name <> newItem.Name
+				   CASE WHEN dbItem.Name <> newItem.Name COLLATE Latin1_General_CS_AS --Sitecore.Support.290996.337531
 					THEN dbItem.Name 
 					ELSE NULL END	   AS OriginalName,
 
@@ -148,7 +148,7 @@ namespace Sitecore.Support.Framework.Publishing.Data.Classic.SqlServer
 			INNER JOIN	[Items] dbItem
 			ON			dbItem.[Id] = newItem.[Id]
 
-		WHERE dbItem.Name		 <> newItem.Name OR
+		WHERE dbItem.Name		 <> newItem.Name COLLATE Latin1_General_CS_AS OR -- Sitecore.Support.290996.337531
 			  dbItem.TemplateID  <> newItem.TemplateId OR
 			  dbItem.ParentID	 <> newItem.ParentId OR
 			  dbItem.MasterID	 <> newItem.MasterId
